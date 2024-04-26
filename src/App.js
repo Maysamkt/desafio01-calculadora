@@ -9,12 +9,12 @@ import { useState } from 'react';
 const App = () => {
 
   const [currentNumber, setCurrentNumber] = useState('0');
-  const [firstNumber, setFirstNumber] = useState('0');
+  const [firstNumber, setFirstNumber] = useState(null);
   const [operation, setOperation] = useState('');
 
   const handlerOnClear = () => { 
     setCurrentNumber('0'); 
-    setFirstNumber('0') ;
+    setFirstNumber(null) ;
     setOperation('');
   };
 
@@ -23,7 +23,7 @@ const App = () => {
   }
 
   const handleSumNumbers = () => {
-    if(firstNumber === '0'){
+    if(firstNumber === null){
       setFirstNumber(String(currentNumber));
       setCurrentNumber('0');
       setOperation('+');
@@ -37,7 +37,7 @@ const App = () => {
   }
 
   const handleMinusNumbers = () => {
-    if(firstNumber === '0'){
+    if(firstNumber === null){
       setFirstNumber(String(currentNumber));
       setCurrentNumber('0');
       setOperation('-');
@@ -50,8 +50,35 @@ const App = () => {
 
   }
 
+  const handleTimesNumbers = () => {
+    if(firstNumber === null){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('*');
+    }else {
+
+      const prod = Number(firstNumber) * Number(currentNumber);
+      setCurrentNumber(String(prod));
+      setOperation('');
+    }
+
+  }
+
+  const handleDivNumbers = () => {
+    if(firstNumber === null){
+      setFirstNumber(String(currentNumber));
+      setCurrentNumber('0');
+      setOperation('/');
+    }else {
+      const div = Number(firstNumber) / Number(currentNumber);
+      setCurrentNumber(String(div));
+      setOperation('');
+    }
+
+  }
+
   const handleEquals = () => {
-    if(firstNumber !== '0' && operation !== '' && currentNumber !== '0'){
+    if(firstNumber !== null && operation !== '' && currentNumber !== '0'){
       switch(operation){
         case '+':
           handleSumNumbers();
@@ -59,6 +86,12 @@ const App = () => {
         case '-':
           handleMinusNumbers();
           break;
+        case '*':
+          handleTimesNumbers();
+        break;
+        case '/':
+          handleDivNumbers();
+        break;
         default:
           
           break;
@@ -72,10 +105,10 @@ const App = () => {
       <Content>
         <Input value={currentNumber} />
         <Row>
-          <Button label="x" onClick={() => handleAddNumber('')} />
-          <Button label="/" onClick={() => handleAddNumber('')} />
+          <Button label="0" onClick={() => handleAddNumber('0')} />
           <Button label="C" onClick={handlerOnClear} />
-          <Button label="*" onClick={() => handleAddNumber('')} />
+          <Button label="/" onClick={handleDivNumbers} />
+          <Button label="*" onClick={handleTimesNumbers} />
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')} />
