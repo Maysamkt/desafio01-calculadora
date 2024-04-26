@@ -75,7 +75,7 @@ const App = () => {
           <Button label="x" onClick={() => handleAddNumber('')} />
           <Button label="/" onClick={() => handleAddNumber('')} />
           <Button label="C" onClick={handlerOnClear} />
-          <Button label="X" onClick={() => handleAddNumber('')} />
+          <Button label="*" onClick={() => handleAddNumber('')} />
         </Row>
         <Row>
           <Button label="7" onClick={() => handleAddNumber('7')} />
